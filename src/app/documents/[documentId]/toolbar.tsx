@@ -1,5 +1,8 @@
+"use client"
+
 import { cn } from "@/lib/utils"
-import { LucideIcon } from "lucide-react"
+import { useEditorStore } from "@/store/use-editor-store"
+import { LucideIcon, Undo2Icon } from "lucide-react"
 
 
 interface ToolbarButtonProps {
@@ -28,9 +31,34 @@ const ToolbarButton = ({
 }
 
 export const Toolbar = () => {
-  return (
+
+  const {editor} = useEditorStore();
+
+
+  const sections:{
+    label:string;
+    icon: LucideIcon;
+    onClick: () => void
+    isActive?: boolean
+
+  }[][] = [
+    [
+      {
+        label: "Undo",
+        icon: Undo2Icon,
+        onClick: () => editor?.chain().focus().undo().run(),
+        isActive: editor?.can().undo(),
+      },
+    ]
+  ]
+
+  return !editor ?(
+    <h1 className="text-sm min-h-screen min-w-screen bg-[#f1f4f9] flex items-center justify-center">loading</h1>
+  ) :(
   <div className="bg-[#f1f4f9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto">
-    Toolbar
+    {sections[0].map((item)=>(
+      <ToolbarButton key={item.label} {...item}/>
+    ))}
   </div>
   )
 }
