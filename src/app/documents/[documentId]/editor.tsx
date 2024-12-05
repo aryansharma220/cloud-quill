@@ -12,6 +12,12 @@ import TableRow from '@tiptap/extension-table-row'
 import Image from '@tiptap/extension-image'
 import ImageResize from "tiptap-extension-resize-image"
 import { useEditorStore } from "@/store/use-editor-store";
+import Underline from '@tiptap/extension-underline'
+import Highlight from '@tiptap/extension-highlight'
+
+
+
+
 export const Editor =()=>{
 
   const {setEditor} = useEditorStore();
@@ -44,7 +50,7 @@ export const Editor =()=>{
     editorProps: {
       attributes:{
         style:"padding-left: 56px !important; padding-right: 56px !important;",
-        class:"focus:outline-none print-border-0 bg-white border border-[#c7c7c7] shadow-md flex flex-col min-h-[1000px] w-[816px] pt-10 pr-14 pb-10 cursor-text"
+        class:"focus:outline-none print-border-0 bg-white border border-[#c7c7c7] shadow-md flex flex-col min-h-[900px] w-[816px] pt-10 pr-14 pb-10 cursor-text"
       },
     },
     extensions: [
@@ -62,6 +68,11 @@ export const Editor =()=>{
       TableRow,
       TableHeader,
       TableCell,
+      Underline,
+      Highlight.configure({
+        multicolor: true
+      }),
+
     ],
     content: `
       <p>Hi there</p>
