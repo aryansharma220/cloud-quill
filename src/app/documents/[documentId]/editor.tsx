@@ -18,9 +18,9 @@ import {Color} from '@tiptap/extension-color'
 import FontFamily from '@tiptap/extension-font-family'
 import TextStyle from '@tiptap/extension-text-style'
 import Link from '@tiptap/extension-link'
-
-
-
+import TextAlign from '@tiptap/extension-text-align'
+import { FontSize } from "@/extensions/font-size";
+import { LineHeight } from "@/extensions/line-height";
 
 export const Editor =()=>{
 
@@ -59,6 +59,9 @@ export const Editor =()=>{
     },
     extensions: [
       StarterKit,
+      LineHeight,
+      FontSize,
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
       TaskItem.configure({
         nested: true
       }),
