@@ -699,6 +699,8 @@ export const Toolbar = () => {
       {sections[2].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
+      <Separator orientation="vertical" className="mx-2.5 h-6 bg-neutral-500" />
+      
     </div>
   );
 };
