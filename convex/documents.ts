@@ -2,6 +2,32 @@ import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { paginationOptsValidator } from "convex/server";
 
+export const getByIds = query({
+  args: {
+    ids: v.array(v.id("documents")),
+  },
+  handler: async (ctx, { ids }) => {
+    const documents = [];
+
+    for (const id of ids) {
+      const document = await ctx.db.get(id);
+      if (document) {
+        documents.push({
+          id: document._id,
+          name: document.title,
+        });
+      } else {
+        documents.push({
+          id,
+          name: "[Removed Document]",
+        });
+      }
+    }
+
+    return documents;
+  },
+});
+
 export const create = mutation({
   args: {
     title: v.optional(v.string()),
@@ -18,12 +44,11 @@ export const create = mutation({
       | string
       | undefined;
 
-
     return await ctx.db.insert("documents", {
       title: title ?? "Untitled Document",
       initialContent,
       ownerId: user.subject,
-      organizationId  ,
+      organizationId,
     });
   },
 });
@@ -91,7 +116,9 @@ export const removeById = mutation({
     if (!document) return new ConvexError("Document not found");
 
     const isOwner = document.ownerId === user.subject;
-    const isOrganizationMember = !!(document.organizationId && document.organizationId === organizationId);
+    const isOrganizationMember = !!(
+      document.organizationId && document.organizationId === organizationId
+    );
     if (!isOwner && !isOrganizationMember)
       return new ConvexError("You are not the owner of this document");
 
@@ -116,7 +143,9 @@ export const updateById = mutation({
     if (!document) return new ConvexError("Document not found");
 
     const isOwner = document.ownerId === user.subject;
-    const isOrganizationMember = !!(document.organizationId && document.organizationId === organizationId);
+    const isOrganizationMember = !!(
+      document.organizationId && document.organizationId === organizationId
+    );
     if (!isOwner && !isOrganizationMember)
       return new ConvexError("You are not the owner of this document");
 
@@ -126,12 +155,11 @@ export const updateById = mutation({
   },
 });
 
-
 export const getById = query({
   args: {
     id: v.id("documents"),
   },
-  handler: async (ctx, {id}) => {
+  handler: async (ctx, { id }) => {
     return await ctx.db.get(id);
-  }
-})
+  },
+});
