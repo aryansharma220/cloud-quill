@@ -49,12 +49,39 @@ import { useEditorStore } from "@/store/use-editor-store";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { Avatars } from "./avatars";
 import { Inbox } from "./inbox";
+import { Doc } from "../../../../convex/_generated/dataModel";
+import { useMutation } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { RenameDialog } from "@/components/rename-dialog";
+import { RemoveDialog } from "@/components/remove-dialog";
 
-export const Navbar = () => {
+interface NavbarProps {
+  data: Doc<"documents">
+}
+
+export const Navbar = ({ data }: NavbarProps) => {
   const { editor } = useEditorStore();
   const [isTableModalOpen, setTableModalOpen] = useState(false);
   const [rows, setRows] = useState(1);
   const [cols, setCols] = useState(1);
+  const router = useRouter();
+  const mutation = useMutation(api.documents.create);
+
+  const onNewDocument = () => {
+    mutation({
+      title: "Untitled Document",
+      initialContent: "",
+    })
+      .then((id) => {
+        toast.success("Document created.");
+        router.push(`/documents/${id}`);
+      })
+      .catch(() => toast.error("Failed to create document."));
+  }
+
+
 
   const insertTable = ({ rows, cols }: { rows: number; cols: number }) => {
     editor
@@ -78,21 +105,21 @@ export const Navbar = () => {
     if (!editor) return;
     const json = editor.getJSON();
     const blob = new Blob([JSON.stringify(json)], { type: "application/json" });
-    onDownload(blob, "document.json");
+    onDownload(blob, `${data.title}.json`);
   };
 
   const onSaveText = () => {
     if (!editor) return;
     const text = editor.getHTML();
     const blob = new Blob([text], { type: "text/plain" });
-    onDownload(blob, "document.txt");
+    onDownload(blob, `${data.title}.txt`);
   };
 
   const onSaveHTML = () => {
     if (!editor) return;
     const html = editor.getHTML();
     const blob = new Blob([html], { type: "text/html" });
-    onDownload(blob, "document.html");
+    onDownload(blob, `${data.title}.html`);
   };
 
   return (
@@ -144,7 +171,7 @@ export const Navbar = () => {
         </Link>
         <div className="flex flex-col">
           {/* Document Input */}
-          <DocumentInput />
+          <DocumentInput title={data.title} id={data._id} />
           {/* MenuBar */}
           <div className="flex">
             <Menubar className="border-none bg-transparent shadow-none h-auto p-0">
@@ -179,20 +206,27 @@ export const Navbar = () => {
                     </MenubarSubContent>
                   </MenubarSub>
                   <MenubarSeparator />
-                  <MenubarItem>
+                  <MenubarItem onClick={onNewDocument}>
                     <FilePlusIcon className="mr-2 size-4" />
                     New Document
                   </MenubarItem>
                   <MenubarSeparator />
-                  <MenubarItem>
+                  <RenameDialog documentId={data._id} initialTitle={data.title}>
+                  <MenubarItem onClick={(e) => e.stopPropagation()}
+                    onSelect={(e) => e.preventDefault()}>
                     <FilePenIcon className="mr-2 size-4" />
                     Rename
                   </MenubarItem>
+                  </RenameDialog>
                   <MenubarSeparator />
-                  <MenubarItem>
+                  <RemoveDialog documentId={data._id}>
+
+                  <MenubarItem onClick={(e) => e.stopPropagation()}
+                    onSelect={(e) => e.preventDefault()}>
                     <TrashIcon className="mr-2 size-4" />
                     Remove
                   </MenubarItem>
+                  </RemoveDialog>
                   <MenubarSeparator />
                   <MenubarItem onClick={() => window.print()}>
                     <PrinterIcon className="mr-2 size-4" />

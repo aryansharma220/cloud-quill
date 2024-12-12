@@ -51,8 +51,6 @@ import {
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { text } from "stream/consumers";
-import { LineHeight } from "@/extensions/line-height";
 
 
 const LineHeighButton = () => {
@@ -467,7 +465,7 @@ const HeadingLevelButton = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
-        {headings.map(({ label, value, fontSize }) => (
+        {headings.map(({ label, value }) => (
           <button
             key={value}
             className={cn(

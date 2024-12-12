@@ -9,10 +9,9 @@ import {
 import { useParams } from "next/navigation";
 import { FullScreenLoader } from "@/components/fullscreen-loader";
 import { getUsers, getDocuments } from "./actions";
-import { toast } from "sonner";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-type User = { id: string; name: string; avatar: string };
+type User = { id: string; name: string; avatar: string, color: string };
 
 export function Room({ children }: { children: ReactNode }) {
   const params = useParams();
@@ -21,12 +20,8 @@ export function Room({ children }: { children: ReactNode }) {
 
   const fetchUsers = useMemo(
     () => async () => {
-      try {
-        const users = await getUsers();
-        setUsers(users);
-      } catch (e) {
-        toast.error("Failed to fetch users");
-      }
+      const users = await getUsers();
+      setUsers(users);
     },
     []
   );
@@ -38,12 +33,12 @@ export function Room({ children }: { children: ReactNode }) {
   return (
     <LiveblocksProvider
       throttle={16}
-      authEndpoint={async ()=>{
-        const endpoint = '/api/liveblocks-auth';
+      authEndpoint={async () => {
+        const endpoint = "/api/liveblocks-auth";
         const room = params.documentId as string;
 
         const response = await fetch(endpoint, {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify({ room }),
         });
         return await response.json();
@@ -62,7 +57,7 @@ export function Room({ children }: { children: ReactNode }) {
         }
         return filteredUsers.map((user) => user.id);
       }}
-      resolveRoomsInfo={async({ roomIds }) => {
+      resolveRoomsInfo={async ({ roomIds }) => {
         const documents = await getDocuments(roomIds as Id<"documents">[]);
         return documents.map((document) => ({
           id: document.id,
@@ -70,7 +65,10 @@ export function Room({ children }: { children: ReactNode }) {
         }));
       }}
     >
-      <RoomProvider id={params.documentId as string} initialStorage={{leftMargin:56, rightMargin:56}}>
+      <RoomProvider
+        id={params.documentId as string}
+        initialStorage={{ leftMargin: 56, rightMargin: 56 }}
+      >
         <ClientSideSuspense
           fallback={<FullScreenLoader label="Room Loading..." />}
         >
