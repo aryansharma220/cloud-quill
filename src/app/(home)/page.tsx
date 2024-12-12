@@ -9,7 +9,7 @@ import { DocumentsTable } from "./documents-table";
 const Home = () => {
   const { results, status, loadMore } = usePaginatedQuery(
     api.documents.get,
-    {},
+    {search: ""},
     { initialNumItems: 5 }
   );
 
