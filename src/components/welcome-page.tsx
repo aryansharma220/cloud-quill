@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { SignIn, SignUp } from "@clerk/nextjs";
 import { 
-  Edit3, Share2, Shield, ArrowRight, Check,
+  Edit3, Share2, Shield, ArrowRight,
   Users, History, Lock, Layout
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -248,7 +248,7 @@ export default function WelcomePage() {
                 <Card key={testimonial.name} className="p-6">
                   <div className="flex items-center gap-4 mb-4">
                     <Avatar className="h-12 w-12">
-                      <img src={testimonial.image} alt={testimonial.name} />
+                      <Image src={testimonial.image} alt={testimonial.name} />
                     </Avatar>
                     <div>
                       <p className="font-semibold">{testimonial.name}</p>
