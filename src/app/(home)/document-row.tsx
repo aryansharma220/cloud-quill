@@ -4,7 +4,7 @@ import { SiGoogledocs } from "react-icons/si";
 import { Building2Icon, CircleUserIcon} from "lucide-react";
 import { format } from "date-fns";
 import { DocumentMenu } from "./document-menu";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 interface DocumentRowProps {
   document: Doc<"documents">;
@@ -32,7 +32,7 @@ export const DocumentRow = ({ document }: DocumentRowProps) => {
       {document.organizationId ? "Organization" : "Personal"}
       </TableCell>
       <TableCell className="text-muted-foreground hidden md:table-cell">
-        {format(new Date(document._creationTime), "MMM dd, yyyy")}
+        {format(new Date(document._creationTime), "MMM dd, yyyy HH:mm")}
       </TableCell>
       <TableCell className="flex justify-end">
         <DocumentMenu 

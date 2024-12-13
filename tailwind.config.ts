@@ -62,6 +62,9 @@ export default {
   				ring: 'hsl(var(--sidebar-ring))'
   			}
   		},
+			boxShadow: {
+				'custom-inset': 'inset 0px -50px 36px -28px rgba(0, 0, 0, 0.35)'
+			},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

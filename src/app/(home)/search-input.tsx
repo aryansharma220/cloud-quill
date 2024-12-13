@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SearchIcon, XIcon } from "lucide-react";
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect } from "react";
 import { useSearchParam } from "@/hooks/use-search-param";
 
 export const SearchInput = () => {
@@ -12,48 +12,39 @@ export const SearchInput = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Search as you type with debounce
+  // Debounced search effect
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       if (value !== search) {
         setSearch(value);
       }
-    }, 500); // 500ms debounce to prevent too many searches
+    }, 500);
 
     return () => clearTimeout(debounceTimer);
   }, [value, search, setSearch]);
 
-  // Clear search on outside click or page reload
+  // Prevent clearing search on every outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        formRef.current && 
+        formRef.current &&
         !formRef.current.contains(event.target as Node)
       ) {
-        setValue("");
-        setSearch("");
+        // Only blur the input without clearing search
+        inputRef.current?.blur();
       }
     };
 
-    // Handle page reload or initial load
-    const handlePageLoad = () => {
-      setValue("");
-      setSearch("");
-    };
+    // Add event listener
+    document.addEventListener("mousedown", handleClickOutside);
 
-    // Add event listeners
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('load', handlePageLoad);
-
-    // Clean up event listeners
+    // Clean up event listener
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('load', handlePageLoad);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [setSearch]);
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
     setValue(event.target.value);
   };
 
@@ -71,17 +62,17 @@ export const SearchInput = () => {
 
   return (
     <div className="flex-1 flex items-center justify-center">
-      <form 
+      <form
         ref={formRef}
-        onSubmit={handleSubmit} 
+        onSubmit={handleSubmit}
         className="relative max-w-[720px] w-full"
       >
         <Input
           value={value}
           ref={inputRef}
           onChange={handleChange}
-          placeholder="Search"
-          className="md:text-base placeholder:text-neutral-500 px-14 w-full border-none focus-visible:shadow-[0_1px_1px_0_rgba(65,69,73,.3),0_1px_3px_1px_rgba(65,69,73,.15)] bg-[#f0f4f8] rounded-full h-[48px] focus-visible:ring-0 focus:bg-white"
+          placeholder="Search your document here..."
+          className="md:text-base placeholder:text-neutral-500 px-14 w-full border-none focus-visible:shadow-[0_1px_1px_0_rgba(65,69,73,.3),0_1px_3px_1px_rgba(65,69,73,.15)] bg-[#f1f8f5] rounded-full h-[48px] focus-visible:ring-0 focus:bg-white "
         />
         <Button
           size="icon"
@@ -93,11 +84,11 @@ export const SearchInput = () => {
         </Button>
         {value && (
           <Button
-            size={"icon"}
+            size="icon"
             type="button"
             onClick={handleClear}
             className="absolute right-3 top-1/2 -translate-y-1/2 [&_svg]:size-5 rounded-full"
-            variant={"ghost"}
+            variant="ghost"
           >
             <XIcon />
           </Button>

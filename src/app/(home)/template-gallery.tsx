@@ -14,10 +14,12 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useUser } from "@clerk/nextjs";
 
 
 export const TemplateGallery = () => {
 
+  const user = useUser();
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const [isCreating, setIsCreating] = useState(false);
@@ -35,9 +37,10 @@ export const TemplateGallery = () => {
 
 
   return (
-    <div className="bg-[#f1f3f4]">
+    <div className="bg-[#f0ebf7] shadow-custom-inner">
       <div className="max-w-screen-xl mx-auto px-16 py-6 flex flex-col gap-y-4">
-        <h3 className="font-medium">Start a new document</h3>
+        <h2 className="font-semibold">Good Morning, {user.user?.firstName}</h2>
+        <h4 className="font-medium">Create a new document</h4>
         <Carousel>
           <CarouselContent className="-ml-4">
             {templates.map((template) => (
@@ -61,7 +64,7 @@ export const TemplateGallery = () => {
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
                     }}
-                    className="size-full hover:border-blue-500 rounded-sm border hover:bg-blue-50 transition flex flex-col items-center justify-center gap-y-4 bg-white"
+                    className="size-full hover:border-blue-500 hover:shadow-md rounded-sm border hover:bg-blue-50 transition flex flex-col items-center justify-center gap-y-4 bg-white"
                   />
                   <p className="text-sm font-medium truncate">
                     {template.label}

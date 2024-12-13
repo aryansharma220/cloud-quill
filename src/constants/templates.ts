@@ -1,4 +1,3 @@
-
 export const templates = [
   {
     id: "blank",
@@ -36,7 +35,6 @@ export const templates = [
     <strong>Year:</strong> Duration (e.g., 2022-2026)<br>
     <strong>CGPA:</strong> CGPA or Percentage (if applicable)
   </li>
-  <!-- Add more education entries if needed -->
 </ul>
 
 <h2>Experience</h2>
@@ -47,7 +45,6 @@ export const templates = [
     <strong>Duration:</strong> Start Date - End Date<br>
     <strong>Responsibilities:</strong> Brief description of key contributions and achievements
   </li>
-  <!-- Add more experience entries if needed -->
 </ul>
 
 <h2>Projects</h2>
@@ -58,7 +55,6 @@ export const templates = [
     <strong>Description:</strong> Brief overview of the project and your contributions<br>
     <strong>Achievements:</strong> Notable outcomes or statistics
   </li>
-  <!-- Add more projects if needed -->
 </ul>
 
 <h2>Skills</h2>
@@ -70,13 +66,11 @@ export const templates = [
 <h2>Certifications</h2>
 <ul>
   <li>Certification Name, Organization, Date (if applicable)</li>
-  <!-- Add more certifications if needed -->
 </ul>
 
 <h2>Achievements</h2>
 <ul>
   <li>Specific awards, rankings, or recognitions</li>
-  <!-- Add more achievements if needed -->
 </ul>
 
 <h2>Interests</h2>
@@ -86,8 +80,7 @@ export const templates = [
 <p>
   Available upon request (or you can provide specific names and contact details if preferred).
 </p>
-
-    `
+    `,
   },
   {
     id: "cover-letter",
@@ -123,8 +116,7 @@ export const templates = [
   Full name.<br>
   Contact information (optional for redundancy).
 </p>
-
-    `
+    `,
   },
   {
     id: "business-letter",
@@ -160,8 +152,102 @@ export const templates = [
 <p>If applicable, mention any documents included with the letter.</p>
 <h2>CC</h2>
 <p>If applicable, list the names of others who are receiving a copy of the letter.</p>
-
-    `
+    `,
+  },
+  {
+    id: "meeting-agenda",
+    label: "Meeting Agenda",
+    imageUrl: "/meeting-agenda.svg",
+    initialContent: `
+      <h1>Meeting Agenda</h1>
+<h2>Meeting Details</h2>
+<p>
+  <strong>Date:</strong> [Meeting Date]<br>
+  <strong>Time:</strong> [Start Time] - [End Time]<br>
+  <strong>Location:</strong> [Venue or Virtual Meeting Link]<br>
+  <strong>Facilitator:</strong> [Name of Organizer]
+</p>
+<h2>Agenda Items</h2>
+<ul>
+  <li>
+    <strong>Item 1:</strong> [Description of agenda item]<br>
+    <strong>Duration:</strong> [Time allocated]
+  </li>
+  <li>
+    <strong>Item 2:</strong> [Description of agenda item]<br>
+    <strong>Duration:</strong> [Time allocated]
+  </li>
+</ul>
+<h2>Expected Outcomes</h2>
+<p>[List of outcomes to be achieved during the meeting]</p>
+<h2>Attendees</h2>
+<p>[List of attendees]</p>
+    `,
+  },
+  {
+    id: "invoice",
+    label: "Invoice",
+    imageUrl: "/invoice.svg",
+    initialContent: `
+      <h1>Invoice</h1>
+<h2>Invoice Details</h2>
+<p>
+  <strong>Invoice Number:</strong> [Invoice #]<br>
+  <strong>Date:</strong> [Date of Issue]<br>
+  <strong>Due Date:</strong> [Payment Due Date]
+</p>
+<h2>Billing Information</h2>
+<p>
+  <strong>From:</strong> [Your Business Name, Address, Contact]<br>
+  <strong>To:</strong> [Client Name, Address, Contact]
+</p>
+<h2>Itemized List</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[Item Description]</td>
+      <td>[Qty]</td>
+      <td>[Price]</td>
+      <td>[Total]</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Grand Total</h2>
+<p>[Total Amount]</p>
+    `,
+  },
+  {
+    id: "storyboard",
+    label: "Storyboard",
+    imageUrl: "/storyboard.svg",
+    initialContent: `
+      <h1>Storyboard</h1>
+<h2>Project Title</h2>
+<p>[Project Title]</p>
+<h2>Scene Details</h2>
+<ul>
+  <li>
+    <strong>Scene 1:</strong> [Description of the first scene]<br>
+    <strong>Notes:</strong> [Additional notes]
+  </li>
+  <li>
+    <strong>Scene 2:</strong> [Description of the second scene]<br>
+    <strong>Notes:</strong> [Additional notes]
+  </li>
+</ul>
+<h2>Visual Elements</h2>
+<p>[Details about visual style, references, or themes]</p>
+<h2>Audio Elements</h2>
+<p>[Details about music, sound effects, or narration]</p>
+    `,
   },
   {
     id: "letter",
@@ -186,7 +272,7 @@ export const templates = [
 <h2>Signature</h2>
 <p>Sender's name and signature (if applicable).</p>
 
-    `
+    `,
   },
   {
     id: "project-proposal",
@@ -208,7 +294,7 @@ export const templates = [
 <p>Estimated costs and funding requirements.</p>
 <h2>Conclusion</h2>
 <p>Summary of the proposal and a call to action for approval or support.</p>
-`
+`,
   },
   {
     id: "software-proposal",

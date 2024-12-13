@@ -69,7 +69,7 @@ export const Editor =({initialContent}: EditorProps)=>{
     editorProps: {
       attributes:{
         style:`padding-left: ${leftMargin ?? 56}px !important; padding-right: ${rightMargin ?? 56}px !important;`,
-        class:"focus:outline-none print-border-0 bg-white border border-[#c7c7c7] shadow-md flex flex-col min-h-[900px] w-[816px] pt-10 pr-14 pb-10 cursor-text"
+        class:"focus:outline-none print-border-0 border border-[#c7c7c7] shadow-md flex flex-col min-h-[900px] w-[816px] pt-10 pr-14 pb-10 cursor-text"
       },
     },
     extensions: [

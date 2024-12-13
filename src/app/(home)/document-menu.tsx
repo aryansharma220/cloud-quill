@@ -29,6 +29,12 @@ export const DocumentMenu = ({
       </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+      <DropdownMenuItem 
+          onClick={() => onNewTab(documentId)}
+        >
+          <ExternalLinkIcon className="size-4 mr-2" />
+          Open in new tab
+        </DropdownMenuItem>
         <RenameDialog documentId={documentId} initialTitle={title}>
           <DropdownMenuItem 
           onSelect={(e) => {e.preventDefault()}}
@@ -47,12 +53,6 @@ export const DocumentMenu = ({
             Remove
           </DropdownMenuItem>
         </RemoveDialog>
-        <DropdownMenuItem 
-          onClick={() => onNewTab(documentId)}
-        >
-          <ExternalLinkIcon className="size-4 mr-2" />
-          Open in new tab
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
