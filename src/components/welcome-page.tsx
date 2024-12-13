@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Avatar } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import Footer from "@/app/(home)/footer";
@@ -35,30 +34,7 @@ export default function WelcomePage() {
     },
   ];
 
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Content Manager",
-      company: "TechCorp",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-      content: "Cloud Quill has transformed how our team collaborates on documents. The real-time editing features are incredible!"
-    },
-    {
-      name: "Michael Chen",
-      role: "Product Designer",
-      company: "DesignHub",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-      content: "The intuitive interface and powerful features make document creation a breeze. Best tool we've used!"
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Team Lead",
-      company: "InnovateLabs",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
-      content: "Security and collaboration in one package. Cloud Quill has become essential for our daily operations."
-    }
-  ];
-
+ 
   const showcaseFeatures = [
     {
       id: "editing",
@@ -236,30 +212,6 @@ export default function WelcomePage() {
                 </TabsContent>
               ))}
             </Tabs>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="py-16 bg-[#e2daf5]">
-          <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">Loved by teams worldwide</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial) => (
-                <Card key={testimonial.name} className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <Avatar className="h-12 w-12">
-                      <Image src={testimonial.image} alt={testimonial.name} />
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.company}</p>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground">{testimonial.content}</p>
-                </Card>
-              ))}
-            </div>
           </div>
         </section>
       </main>
