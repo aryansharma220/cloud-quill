@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 
 const Footer = () => {
   return (
-    <footer className="fixed bg-[#735DA5] bottom-0 flex h-10 w-full items-center justify-center border-t">
+    <footer className="fixed bg-[#735DA5] bottom-0 flex h-10 w-full items-center justify-center border-t z-50">
       <p className="text-sm text-white">
         &copy; {new Date().getFullYear()} CloudQuill
       </p>
