@@ -133,7 +133,7 @@ export default function WelcomePage() {
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
             >
-              <Image src="/logo.svg" alt="logo" width={40} height={40} />
+              <Image src="/logo.svg" alt="Cloud Quill Logo - A modern document editor" width={40} height={40} />
             </motion.div>
             <h3 className="text-xl font-semibold text-[#735DA5] group-hover:text-[#8c76bd] transition-colors">
               Cloud Quill
@@ -151,6 +151,7 @@ export default function WelcomePage() {
             className="hidden sm:block"
           >
             <Button
+              aria-label="Sign in to Cloud Quill"
               variant="outline"
               className="border-[#735DA5] text-[#735DA5] hover:bg-[#735DA5] hover:text-white transition-colors"
               onClick={() => setAuthMode("sign-in")}
@@ -195,9 +196,13 @@ export default function WelcomePage() {
         </div>
       </motion.nav>
 
-      <main className="flex-1">
+      <main className="flex-1" role="main">
         {/* Hero and Auth Section */}
-        <section className="py-16 sm:py-24 relative overflow-hidden">
+        <section 
+          className="py-16 sm:py-24 relative overflow-hidden"
+          aria-label="Hero section"
+          role="banner"
+        >
           {/* Background decoration */}
           <div className="absolute inset-0 -z-10">
             <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
@@ -386,7 +391,7 @@ export default function WelcomePage() {
               </p>
             </div>
 
-            <Tabs defaultValue="editing" className="w-full">
+            <Tabs defaultValue="editing" className="w-full" aria-label="Feature categories">
               <TabsList className="grid w-full grid-cols-3 mb-12 bg-white/50 p-2 rounded-xl">
                 {showcaseFeatures.map((feature) => (
                   <TabsTrigger
