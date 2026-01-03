@@ -1,5 +1,6 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
+// This middleware protects your application using Clerk
 export default clerkMiddleware();
 
 export const config = {
